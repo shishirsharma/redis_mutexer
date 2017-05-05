@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["IAmPallavSharma"]
   spec.email         = ["mail.pallavsharma@gmail.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{Locking object for a user, using redis.}
+  spec.description   = %q{Locking object for a user for a given time, using redis. Preventing other users to edit it at the same time.}
+  spec.homepage      = "https://github.com/pallavsharma/redis_mutexer"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -33,4 +33,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.14"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
+
+  # Dependencies
+  spec.add_runtime_dependency "redis", "~> 3.2.1"
+
 end
