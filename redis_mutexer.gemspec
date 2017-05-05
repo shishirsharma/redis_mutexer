@@ -35,6 +35,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
 
   # Dependencies
-  spec.add_runtime_dependency "redis", "~> 3.2.1"
+  spec.add_runtime_dependency "redis", "~> 3.0.7"
 
 end
