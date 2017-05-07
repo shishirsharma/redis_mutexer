@@ -17,15 +17,15 @@ module RedisMutexer
     attr_accessor :config
   end
 
-  def redis
-    @config ||= Configuration.new
-    @config.redis ||=
-      Redis.new(host: @config.host,
-                port: @config.port,
-                db:   @config.db,
-                time: @config.time
-               )
-  end
+  # def redis
+  #   @config ||= Configuration.new
+  #   @config.redis ||=
+  #     Redis.new(host: @config.host,
+  #               port: @config.port,
+  #               db:   @config.db,
+  #               time: @config.time
+  #              )
+  # end
 
   def configure
     @config ||= Configuration.new
@@ -42,13 +42,13 @@ module RedisMutexer
   end
 
   def lock(obj, time)
-    redis.setex("#{obj.class.name + ":" + obj.id.to_s}", time, self.id)
+    @config.redis.setex("#{obj.class.name + ":" + obj.id.to_s}", time, self.id)
   end
   def locked?(obj)
-    (redis.get("#{obj.class.name + ":" + obj.id.to_s}").to_i == self.id) ? true : false
+    (@config.redis.get("#{obj.class.name + ":" + obj.id.to_s}").to_i == self.id) ? true : false
   end
   def unlock(obj)
-    redis.del("#{obj.class.name + ":" + obj.id.to_s}")
+    @config.redis.del("#{obj.class.name + ":" + obj.id.to_s}")
   end
 
   module_function :configure
