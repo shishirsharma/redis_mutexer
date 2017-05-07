@@ -7,6 +7,8 @@ require 'rspec'
 require 'pry'
 require "generator_spec"
 
+require 'logger'
+
 
 PROJECT_ROOT = File.expand_path(File.join(File.dirname(__FILE__), '..')).freeze
 $LOAD_PATH << File.join(PROJECT_ROOT, 'lib')
@@ -19,20 +21,28 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  config.before(:all) { setup_db }
+  config.after(:all)  { teardown_db }
 end
+
 
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 
+logger = Logger.new(STDOUT)
+logger.info ">>1 using google_geocoding_api"
+
 def setup_db
+  logger = Logger.new(STDOUT)
+  logger.info "Setup DB"
+
   ActiveRecord::Schema.define(:version => 1) do
     create_table :users do |t|
-      t.integer  :id
       t.string   :name
       t.timestamps
     end
 
-    create_table :topic do |t|
-      t.integer  :id
+    create_table :topics do |t|
       t.string   :title
       t.timestamps
     end
@@ -47,4 +57,7 @@ end
 
 class User < ActiveRecord::Base
   include RedisMutexer
+end
+
+class Topic < ActiveRecord::Base
 end

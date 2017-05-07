@@ -95,7 +95,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord (>= 4.0.0)
-  bundler (~> 1.14)
+  bundler
   generator_spec
   pry
   rake (~> 10.0)

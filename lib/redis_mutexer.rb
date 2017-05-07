@@ -20,10 +20,10 @@ module RedisMutexer
   def redis
     @config ||= Configuration.new
     @config.redis ||=
-      Redis.new(host: config.host,
-                port: config.port,
-                db:   config.db,
-                time: config.time
+      Redis.new(host: @config.host,
+                port: @config.port,
+                db:   @config.db,
+                time: @config.time
                )
   end
 
