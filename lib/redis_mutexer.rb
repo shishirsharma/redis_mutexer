@@ -3,8 +3,6 @@ require "redis"
 
 module RedisMutexer
 
-  extend ActiveSupport::Concern
-
   def redis
     redis ||=
       Redis.new(:host => "localhost",
